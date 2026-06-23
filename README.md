@@ -1,36 +1,53 @@
-# Sepidman Personal Website
+# Sepideh Mansouri Portfolio
 
-This repository is an Eleventy-powered personal website ready for GitHub Pages deployment.
+This repository contains a data-driven personal portfolio website built with Eleventy for a UI/UX designer. The public site, HTML resume, and downloadable PDF resume are generated from shared structured content.
 
-## Quick start
+## Stack
 
-1. Install dependencies:
+- Eleventy
+- Nunjucks
+- JSON Resume data
+- Playwright for PDF export
+
+## Project structure
+
+- `src/` — site templates, pages, styles, and project content
+- `src/projects/` — data-driven case-study entries
+- `src/_data/` — global site data and normalized resume data
+- `cv/resume.json` — canonical resume source
+- `docs/` — generated site output for deployment
+- `tools/generate_resume_pdf.mjs` — build-time PDF export
+
+## Local development
+
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-2. Start the local development server:
+Install the Playwright browser once:
+
+```bash
+npx playwright install chromium
+```
+
+Start the local dev server:
 
 ```bash
 npm run dev
 ```
 
-3. Build the site for deployment:
+Build the site and resume PDF:
 
 ```bash
 npm run build
 ```
 
-## GitHub Pages
+## Content workflow
 
-This site builds into the `docs/` folder. A GitHub Actions workflow is included at `.github/workflows/deploy.yml` to build the site and deploy it automatically on every push to `main`.
+- Update resume content in `cv/resume.json`
+- Update site-wide biography/contact content in `src/_data/site.json`
+- Add or edit case studies in `src/projects/`
 
-The workflow publishes the generated website to the `gh-pages` branch.
-
-## Project structure
-
-- `src/` — source files and templates
-- `docs/` — generated site output
-- `.eleventy.js` — Eleventy configuration
-- `package.json` — build and development scripts
+The resume page and downloadable PDF are both generated from the same resume source file.

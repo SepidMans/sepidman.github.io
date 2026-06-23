@@ -1,16 +1,20 @@
 {
   "name": "sepidman.github.io",
   "version": "1.0.0",
-  "description": "Personal website for Sepidman built with Eleventy",
+  "description": "Personal website for Sepideh Mansouri built with Eleventy",
   "private": true,
   "scripts": {
     "dev": "npx @11ty/eleventy --serve --input=src --output=docs",
-    "build": "npx @11ty/eleventy --input=src --output=docs",
+    "build:site": "npx @11ty/eleventy --input=src --output=docs",
+    "build:pdf": "node tools/generate_resume_pdf.mjs",
+    "build": "npm run build:site && npm run build:pdf",
     "clean": "npx rimraf docs",
     "start": "npm run dev"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.5",
+    "luxon": "^3.7.2",
+    "playwright": "^1.53.1",
     "rimraf": "^5.0.0"
   }
 }

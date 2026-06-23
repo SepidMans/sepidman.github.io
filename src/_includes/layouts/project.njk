@@ -1,0 +1,33 @@
+---
+layout: layouts/base.njk
+---
+<article class="project-page">
+  <section class="page-hero page-hero-project">
+    <div class="page-hero-copy">
+      <p class="eyebrow">Case study</p>
+      <h1>{{ title }}</h1>
+      <p class="page-lead">{{ summary }}</p>
+    </div>
+    <div class="page-hero-visual visual-swatch visual-swatch-{{ coverTone or 'sage' }}">
+      <span>{{ role }}</span>
+      <strong>{{ timeline }}</strong>
+    </div>
+  </section>
+
+  <section class="project-meta-grid">
+    {% include "partials/project-meta.njk" %}
+  </section>
+
+  <section class="project-rich-text">
+    {{ content | safe }}
+  </section>
+
+  <section class="cta-panel">
+    <p class="eyebrow">Looking for more?</p>
+    <h2>See the rest of the portfolio or get in touch.</h2>
+    <div class="cta-row">
+      <a class="button" href="/work/">Back to all work</a>
+      <a class="button button-secondary" href="/contact/">Contact me</a>
+    </div>
+  </section>
+</article>

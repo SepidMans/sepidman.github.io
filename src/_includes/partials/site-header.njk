@@ -1,0 +1,83 @@
+<a class="skip-link" href="#content">Skip to content</a>
+<header class="site-header">
+  <a class="brandmark" href="/" aria-label="{{ site.title }} home">
+    <span class="brandmark-monogram">
+      <img
+        class="brandmark-image"
+        src="{{ site.author.brandImage }}"
+        alt="{{ site.author.name }}"
+        width="44"
+        height="44"
+        loading="eager"
+        fetchpriority="high"
+        />
+    </span>
+    <span class="brandmark-copy">
+      <strong>{{ site.author.name }}</strong>
+      <span>{{ site.tagline }}</span>
+    </span>
+  </a>
+  <nav class="site-nav" id="site-nav" aria-label="Primary" data-site-nav>
+    {% for item in site.navigation %}
+      {% set isCurrent = page.url == item.url or (item.url != "/" and page.url.indexOf(item.url) == 0) %}
+      <a
+        href="{{ item.url }}"
+        {% if isCurrent %} aria-current="page"{% endif %}
+        aria-label="{{ item.label }}"
+      >
+        <span class="site-nav-icon" aria-hidden="true">
+          {% include "partials/nav-icon.njk" %}
+        </span>
+        <span class="site-nav-label">{{ item.label }}</span>
+      </a>
+    {% endfor %}
+  </nav>
+  <div class="site-header-actions">
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-nav"
+      data-menu-toggle
+      title="Open menu"
+    >
+      <span class="menu-toggle-icon" aria-hidden="true">≡</span>
+      <span class="menu-toggle-label">Menu</span>
+    </button>
+    <div class="social-icon-row" aria-label="Social links">
+      {% for item in site.headerSocial %}
+        {% if item.url %}
+          <a
+            class="social-icon-link"
+            href="{{ item.url }}"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="{{ item.name }}"
+            title="{{ item.name }}"
+          >
+            {% include "partials/social-icon.njk" %}
+          </a>
+        {% else %}
+          <span
+            class="social-icon-link social-icon-link-disabled"
+            aria-hidden="true"
+            title="{{ item.name }} link not configured"
+          >
+            {% include "partials/social-icon.njk" %}
+          </span>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <button
+      class="theme-toggle"
+      type="button"
+      aria-label="Switch to dark theme"
+      aria-pressed="false"
+      data-theme-toggle
+      title="Switch theme"
+    >
+      <span class="theme-toggle-icon" aria-hidden="true">◐</span>
+      <span class="theme-toggle-label"></span>
+    </button>
+  </div>
+</header>

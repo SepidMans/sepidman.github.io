@@ -4,20 +4,35 @@
     "dockerfile": "Dockerfile",
     "context": ".."
   },
+  "init": true,
   "customizations": {
     "vscode": {
+      "settings": {
+        "editor.formatOnSave": true,
+        "files.trimTrailingWhitespace": true,
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
       "extensions": [
         "esbenp.prettier-vscode",
         "dbaeumer.vscode-eslint",
+        "ecmel.vscode-html-css",
+        "DavidAnson.vscode-markdownlint",
+        "EditorConfig.EditorConfig",
+        "sissel.shopify-liquid",
         "GitHub.vscode-pull-request-github",
         "ms-azuretools.vscode-docker"
       ]
     }
   },
-  "settings": {
-    "terminal.integrated.shell.linux": "/bin/bash"
-  },
   "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": {
+      "label": "Eleventy live preview",
+      "onAutoForward": "openPreview",
+      "requireLocalPort": true
+    }
+  },
   "postCreateCommand": "npm install",
-  "remoteUser": "vscode"
+  "postAttachCommand": "bash -lc 'echo \"Run npm run dev to start the live preview on port 8080.\"'",
+  "remoteUser": "node"
 }

@@ -1,0 +1,37 @@
+<section class="resume-section">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Experience</p>
+      <h2>Professional background</h2>
+    </div>
+  </div>
+  <div class="resume-timeline">
+    {% for item in resume.work %}
+      <article class="timeline-item">
+        <div class="timeline-heading">
+          <div>
+            <h3>{{ item.position }}</h3>
+            <p>{{ item.name }}{% if item.location %} · {{ item.location }}{% endif %}</p>
+          </div>
+          {% if item.startDate or item.endDate %}
+            <p class="timeline-range">
+              {% if item.startDate %}
+                <time datetime="{{ item.startDate | isoDate }}">{{ item.startDate | resumeDate }}</time>
+              {% endif %}
+              {% if item.endDate %}
+                - <time datetime="{{ item.endDate | isoDate }}">{{ item.endDate | resumeDate }}</time>
+              {% elseif item.startDate %}
+                - Present
+              {% endif %}
+            </p>
+          {% endif %}
+        </div>
+        <ul class="resume-bullets">
+          {% for highlight in item.highlights %}
+            <li>{{ highlight }}</li>
+          {% endfor %}
+        </ul>
+      </article>
+    {% endfor %}
+  </div>
+</section>

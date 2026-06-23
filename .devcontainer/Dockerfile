@@ -1,4 +1,4 @@
-# Devcontainer Dockerfile: Node 20 + common dev tools
+# Devcontainer Dockerfile: Node 20 + website development tools
 FROM mcr.microsoft.com/devcontainers/javascript-node:0-20
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -13,11 +13,20 @@ RUN apt-get update \
     python3 \
     python3-pip \
     unzip \
+    zip \
     openssh-client \
     apt-transport-https \
     sudo \
     ripgrep \
     jq \
+    tree \
+    shellcheck \
+    imagemagick \
+    sqlite3 \
+    less \
+    nano \
+    vim \
+    git-lfs \
   && rm -rf /var/lib/apt/lists/*
 
 # Install GitHub CLI
@@ -28,7 +37,7 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | d
   && apt-get install -y gh \
   && rm -rf /var/lib/apt/lists/*
 
-# Give the vscode user passwordless sudo (convenience)
-RUN if id -u vscode >/dev/null 2>&1; then usermod -aG sudo vscode; echo 'vscode ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/99_vscode-nopasswd; fi
+# Give the default non-root user passwordless sudo (convenience)
+RUN if id -u node >/dev/null 2>&1; then usermod -aG sudo node; echo 'node ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/99_node-nopasswd; fi
 
-USER vscode
+USER node

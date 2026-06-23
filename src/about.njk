@@ -1,10 +1,60 @@
 ---
 layout: layouts/base.njk
 title: About
+description: Learn more about Sepideh Mansouri, her design background, and what guides her work.
 ---
-<article class="content-block">
-  <h2>About me</h2>
-  <p>I am a maker who enjoys turning ideas into polished websites and digital experiences. My focus is on clarity, accessibility, and thoughtful craftsmanship.</p>
-  <p>Right now, I'm exploring new ways to combine content, portfolio work, and developer tooling into a clean personal website.</p>
-  <p>If you want to connect, feel free to reach out via <a href="https://github.com/SepidMans" target="_blank" rel="noreferrer">GitHub</a> or <a href="https://www.linkedin.com/in/sepid-mans/" target="_blank" rel="noreferrer">LinkedIn</a>.</p>
-</article>
+<section class="page-hero">
+  <div class="page-hero-copy">
+    <p class="eyebrow">About</p>
+    <h1>Designing with calm structure, empathy, and a strong sense of visual tone.</h1>
+    {% for paragraph in site.about.summary %}
+      <p class="page-lead">{{ paragraph }}</p>
+    {% endfor %}
+  </div>
+  <div class="page-hero-visual visual-swatch visual-swatch-coral">
+    <span>Berlin based</span>
+    <strong>UI/UX Designer</strong>
+  </div>
+</section>
+
+<section class="split-section">
+  <article class="content-card">
+    <p class="eyebrow">What guides me</p>
+    <h2>I want interfaces to feel capable, respectful, and easy to move through.</h2>
+    <p>My background in content work and customer-facing roles taught me how much trust depends on clarity. In design, I bring that same attention to information structure, interaction flow, and the emotional tone of each screen.</p>
+  </article>
+  <aside class="note-card">
+    <p class="eyebrow">Principles</p>
+    <ul class="plain-list">
+      {% for principle in site.about.principles %}
+        <li>{{ principle }}</li>
+      {% endfor %}
+    </ul>
+  </aside>
+</section>
+
+<section class="section-block">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Working style</p>
+      <h2>Research-minded, visually thoughtful, and collaborative.</h2>
+    </div>
+  </div>
+  <div class="cards-grid">
+    <article class="info-card">
+      <p class="eyebrow">Listen</p>
+      <h3>Understand the real problem</h3>
+      <p>I like starting with user goals and context so the work solves what actually matters.</p>
+    </article>
+    <article class="info-card">
+      <p class="eyebrow">Shape</p>
+      <h3>Turn ideas into usable structure</h3>
+      <p>I organize flows, content, and components so the product feels coherent and easier to use.</p>
+    </article>
+    <article class="info-card">
+      <p class="eyebrow">Refine</p>
+      <h3>Build trust through detail</h3>
+      <p>I care about hierarchy, wording, and visual finish because small decisions shape confidence.</p>
+    </article>
+  </div>
+</section>

@@ -1,0 +1,39 @@
+---
+layout: layouts/base.njk
+title: Contact
+description: Contact Sepideh Mansouri for UI/UX opportunities and collaborations.
+---
+<section class="page-hero">
+  <div class="page-hero-copy">
+    <p class="eyebrow">Contact</p>
+    <h1>Let’s talk about design roles, internships, or thoughtful digital products.</h1>
+    <p class="page-lead">{{ site.contact.intro }}</p>
+    <p>{{ site.contact.availability }}</p>
+  </div>
+  <div class="page-hero-visual visual-swatch visual-swatch-sand">
+    <span>Email</span>
+    <strong>{{ site.author.email }}</strong>
+  </div>
+</section>
+
+<section class="contact-grid">
+  <article class="contact-card">
+    <p class="eyebrow">Email</p>
+    <h2><a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></h2>
+    <p>The best place to reach me for roles, portfolio conversations, and collaboration inquiries.</p>
+  </article>
+
+  {% for item in site.social %}
+    <article class="contact-card">
+      <p class="eyebrow">{{ item.name }}</p>
+      <h2><a href="{{ item.url }}" target="_blank" rel="noreferrer">{{ item.url | replace("https://www.", "") | replace("https://", "") }}</a></h2>
+      <p>Connect with me and explore more of my background and work.</p>
+    </article>
+  {% endfor %}
+
+  <article class="contact-card">
+    <p class="eyebrow">Resume</p>
+    <h2><a href="{{ site.contact.resumePdf }}">Download PDF</a></h2>
+    <p>Get the printable version of my resume generated from the same structured resume source as this website.</p>
+  </article>
+</section>

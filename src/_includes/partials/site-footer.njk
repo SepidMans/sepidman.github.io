@@ -1,0 +1,12 @@
+<footer class="site-footer">
+  <div>
+    <p class="eyebrow">Contact</p>
+    <a class="footer-email" href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>
+  </div>
+  <div class="footer-links">
+    {% for item in site.social %}
+      <a href="{{ item.url }}" target="_blank" rel="noreferrer">{{ item.name }}</a>
+    {% endfor %}
+    <a href="/assets/sepideh-mansouri-resume.pdf">Download CV</a>
+  </div>
+</footer>

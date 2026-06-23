@@ -1,37 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    {% if title %}
+      {% set pageTitle = title ~ " | " ~ site.title %}
+    {% else %}
+      {% set pageTitle = site.title %}
+    {% endif %}
+    {% set pageDescription = description or site.description %}
+    {% set canonicalUrl = site.url ~ page.url %}
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="{{ site.description }}" />
-    <title>{{ title }} | {{ site.title }}</title>
+    <title>{{ pageTitle }}</title>
+    <meta name="description" content="{{ pageDescription }}" />
+    <link rel="canonical" href="{{ canonicalUrl }}" />
+    <meta property="og:title" content="{{ pageTitle }}" />
+    <meta property="og:description" content="{{ pageDescription }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ canonicalUrl }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" as="image" href="{{ site.author.brandImage }}" />
+    <script>
+      (function() {
+        var storedTheme = null;
+        try {
+          storedTheme = localStorage.getItem("theme");
+        } catch (error) {
+          storedTheme = null;
+        }
+
+        var theme = storedTheme;
+        if (!theme) {
+          theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+
+        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.setAttribute("data-next-theme-label", theme === "dark" ? "Light" : "Dark");
+      }());
+    </script>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <div class="site-shell">
-      <header class="site-header">
-        <div class="site-branding">
-          <p class="eyebrow">Personal site</p>
-          <h1>{{ site.title }}</h1>
-        </div>
-        <nav class="site-nav">
-          <a href="/">Home</a>
-          <a href="/about/">About</a>
-        </nav>
-      </header>
-
-      <main class="site-main">
+    <div class="site-frame">
+      {% include "partials/site-header.njk" %}
+      <main id="content" class="site-main">
         {{ content | safe }}
       </main>
-
-      <footer class="site-footer">
-        <p>Built with Eleventy &middot; <strong>{{ site.author }}</strong></p>
-        <p>
-          {% for item in site.social %}
-            <a href="{{ item.url }}">{{ item.name }}</a>{% if not loop.last %} &middot; {% endif %}
-          {% endfor %}
-        </p>
-      </footer>
+      {% include "partials/site-footer.njk" %}
     </div>
+    <script src="/theme.js" defer></script>
   </body>
 </html>

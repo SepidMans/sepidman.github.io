@@ -1,0 +1,21 @@
+<section class="resume-hero">
+  <div>
+    <p class="eyebrow">Resume</p>
+    <h1>{{ resume.basics.name }}</h1>
+    <p class="resume-title">{{ resume.basics.label }}</p>
+    <p class="page-lead">{{ resume.basics.summary }}</p>
+  </div>
+  <aside class="resume-contact-card">
+    <p><strong>Location</strong><span>{{ site.author.location }}</span></p>
+    <p><strong>Email</strong><a href="mailto:{{ resume.basics.email }}">{{ resume.basics.email }}</a></p>
+    {% set linkedin = resume.basics.profiles | primaryProfile("LinkedIn") %}
+    {% set github = resume.basics.profiles | primaryProfile("GitHub") %}
+    {% if linkedin %}
+      <p><strong>LinkedIn</strong><a href="{{ linkedin.url }}">{{ linkedin.url | replace("https://www.", "") | replace("https://", "") }}</a></p>
+    {% endif %}
+    {% if github %}
+      <p><strong>GitHub</strong><a href="{{ github.url }}">{{ github.url | replace("https://www.", "") | replace("https://", "") }}</a></p>
+    {% endif %}
+    <a class="button" href="{{ resume.resumePdfPath }}">Download PDF</a>
+  </aside>
+</section>

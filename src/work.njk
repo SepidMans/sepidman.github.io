@@ -1,0 +1,24 @@
+---
+layout: layouts/base.njk
+title: Work
+description: Selected UI/UX projects and case studies by Sepideh Mansouri.
+---
+<section class="page-hero">
+  <div class="page-hero-copy">
+    <p class="eyebrow">Work</p>
+    <h1>Portfolio work focused on user clarity, thoughtful systems, and visual restraint.</h1>
+    <p class="page-lead">These case studies show how I approach product structure, interface design, and experience tone together.</p>
+  </div>
+  <div class="page-hero-visual visual-swatch visual-swatch-slate">
+    <span>Selected case studies</span>
+    <strong>{{ collections.projects | length }} projects</strong>
+  </div>
+</section>
+
+<section class="section-block">
+  <div class="project-grid project-grid-full">
+    {% for project in collections.projects %}
+      {% include "partials/project-card.njk" %}
+    {% endfor %}
+  </div>
+</section>
