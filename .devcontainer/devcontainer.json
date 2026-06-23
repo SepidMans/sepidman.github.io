@@ -1,0 +1,23 @@
+{
+  "name": "Eleventy Dev Container",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "GitHub.vscode-pull-request-github",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  },
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "forwardPorts": [8080],
+  "postCreateCommand": "npm install",
+  "remoteUser": "vscode"
+}
