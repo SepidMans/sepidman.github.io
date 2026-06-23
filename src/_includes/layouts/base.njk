@@ -25,10 +25,10 @@
       </main>
 
       <footer class="site-footer">
-        <p>Built with Eleventy · <strong>{{ site.author }}</strong></p>
+        <p>Built with Eleventy &middot; <strong>{{ site.author }}</strong></p>
         <p>
           {% for item in site.social %}
-            <a href="{{ item.url }}">{{ item.name }}</a>{% if not loop.last %} · {% endif %}
+            <a href="{{ item.url }}">{{ item.name }}</a>{% if not loop.last %} &middot; {% endif %}
           {% endfor %}
         </p>
       </footer>
