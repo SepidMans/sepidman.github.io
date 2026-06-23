@@ -514,8 +514,34 @@ li {
 }
 
 .hero-panel .eyebrow,
-.hero-panel li {
+.hero-panel li,
+.hero-panel-caption,
+.hero-panel-note {
   color: var(--inverse-text);
+}
+
+.hero-graphic-frame {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: calc(var(--radius-md) + 2px);
+  background: rgba(250, 247, 242, 0.96);
+}
+
+.hero-graphic {
+  width: 100%;
+  height: auto;
+}
+
+.hero-panel-caption {
+  margin: 1.1rem 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+}
+
+.hero-panel-note {
+  margin: 0.5rem 0 0;
+  color: color-mix(in srgb, var(--inverse-text) 88%, transparent);
 }
 
 .plain-list {
@@ -798,8 +824,38 @@ li {
   font-size: 1.45rem;
 }
 
-.contact-card a {
+.contact-card {
+  transition: border-color 180ms ease, transform 180ms ease, background 180ms ease;
+}
+
+.contact-card-link {
+  display: block;
   text-decoration: none;
+}
+
+.contact-card:hover,
+.contact-card:focus-visible,
+.contact-card-link:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 42%, var(--line));
+  transform: translateY(-2px);
+}
+
+.contact-card-icon {
+  width: 2.65rem;
+  height: 2.65rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--panel-overlay);
+  color: var(--accent-dark);
+  margin-bottom: 1rem;
+}
+
+.contact-card-icon svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  fill: currentColor;
 }
 
 .resume-hero {
@@ -1043,6 +1099,10 @@ li {
 @media (max-width: 700px) {
   :root {
     --header-offset: 0.75rem;
+    --header-mask-height: calc(var(--header-offset) + 6.5rem);
+  }
+
+  html[data-menu-open="true"] {
     --header-mask-height: calc(var(--header-offset) + 14rem);
   }
 

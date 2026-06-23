@@ -45,6 +45,11 @@
   ],
   "headerSocial": [
     {
+      "name": "Email",
+      "url": "mailto:sepideh.mansouri85@gmail.com",
+      "icon": "email"
+    },
+    {
       "name": "LinkedIn",
       "url": "https://www.linkedin.com/in/sepid-mans/",
       "icon": "linkedin"
