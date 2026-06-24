@@ -3,7 +3,7 @@ import { resolve, join, extname } from "node:path";
 import { createServer } from "node:http";
 import { chromium } from "playwright";
 
-const rootDir = resolve(process.cwd(), "docs");
+const rootDir = resolve(process.cwd(), "build");
 const outputDir = join(rootDir, "assets");
 const outputFile = join(outputDir, "sepideh-mansouri-resume.pdf");
 const mimeTypes = {
@@ -56,7 +56,7 @@ function startStaticServer() {
 
 async function generate() {
   if (!existsSync(rootDir)) {
-    throw new Error("The docs directory does not exist. Run the site build before generating the PDF.");
+    throw new Error("The build directory does not exist. Run the site build before generating the PDF.");
   }
 
   mkdirSync(outputDir, { recursive: true });

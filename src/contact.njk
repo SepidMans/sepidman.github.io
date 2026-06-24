@@ -3,45 +3,35 @@ layout: layouts/base.njk
 title: Contact
 description: Contact Sepideh Mansouri for UI/UX opportunities and collaborations.
 ---
-<section class="page-hero">
-  <div class="page-hero-copy">
+<section class="contact-layout">
+  <div class="contact-intro">
     <p class="eyebrow">Contact</p>
     <h1>Let’s talk about design roles, internships, or thoughtful digital products.</h1>
     <p class="page-lead">{{ site.contact.intro }}</p>
     <p>{{ site.contact.availability }}</p>
   </div>
-</section>
 
-<section class="contact-grid">
-  <a class="contact-card contact-card-link" href="mailto:{{ site.author.email }}">
-    <div class="contact-card-icon" aria-hidden="true">
-      {% set icon = "email" %}
-      {% include "partials/contact-icon.njk" %}
-    </div>
-    <p class="eyebrow">Email</p>
-    <h2>{{ site.author.email }}</h2>
-    <p>The best place to reach me for roles, portfolio conversations, and collaboration inquiries.</p>
-  </a>
+  <div class="contact-grid">
+    {% for item in site.social %}
+      <a class="contact-card contact-card-link" href="{{ item.url }}" target="_blank" rel="noreferrer" data-brand="{{ item.name | lower }}">
+        <div class="contact-card-icon" aria-hidden="true">
+          {% set icon = item.name | lower %}
+          {% include "partials/contact-icon.njk" %}
+        </div>
+        <p class="eyebrow">{{ item.name }}</p>
+        <h2>{{ item.url | replace("https://www.", "") | replace("https://", "") }}</h2>
+        <p>Connect with me and explore more of my background and work.</p>
+      </a>
+    {% endfor %}
 
-  {% for item in site.social %}
-    <a class="contact-card contact-card-link" href="{{ item.url }}" target="_blank" rel="noreferrer">
+    <a class="contact-card contact-card-link" href="mailto:{{ site.author.email }}" data-brand="email">
       <div class="contact-card-icon" aria-hidden="true">
-        {% set icon = item.name | lower %}
+        {% set icon = "email" %}
         {% include "partials/contact-icon.njk" %}
       </div>
-      <p class="eyebrow">{{ item.name }}</p>
-      <h2>{{ item.url | replace("https://www.", "") | replace("https://", "") }}</h2>
-      <p>Connect with me and explore more of my background and work.</p>
+      <p class="eyebrow">Email</p>
+      <h2>{{ site.author.email }}</h2>
+      <p>The best place to reach me for roles, portfolio conversations, and collaboration inquiries.</p>
     </a>
-  {% endfor %}
-
-  <a class="contact-card contact-card-link" href="{{ site.contact.resumePdf }}">
-    <div class="contact-card-icon" aria-hidden="true">
-      {% set icon = "resume" %}
-      {% include "partials/contact-icon.njk" %}
-    </div>
-    <p class="eyebrow">Resume</p>
-    <h2>Download PDF</h2>
-    <p>Get the printable version of my resume generated from the same structured resume source as this website.</p>
-  </a>
+  </div>
 </section>

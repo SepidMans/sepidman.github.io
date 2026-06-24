@@ -15,7 +15,7 @@ This repository contains a data-driven personal portfolio website built with Ele
 - `src/projects/` — data-driven case-study entries
 - `src/_data/` — global site data and normalized resume data
 - `cv/resume.json` — canonical resume source
-- `docs/` — generated site output for deployment
+- `build/` — generated site output for deployment
 - `tools/generate_resume_pdf.mjs` — build-time PDF export
 
 ## Local development

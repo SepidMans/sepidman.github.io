@@ -4,11 +4,11 @@
   "description": "Personal website for Sepideh Mansouri built with Eleventy",
   "private": true,
   "scripts": {
-    "dev": "npx @11ty/eleventy --serve --input=src --output=docs",
-    "build:site": "npx @11ty/eleventy --input=src --output=docs",
+    "dev": "npx @11ty/eleventy --serve --input=src --output=build",
+    "build:site": "npx @11ty/eleventy --input=src --output=build",
     "build:pdf": "node tools/generate_resume_pdf.mjs",
     "build": "npm run build:site && npm run build:pdf",
-    "clean": "npx rimraf docs",
+    "clean": "npx rimraf build",
     "start": "npm run dev"
   },
   "devDependencies": {

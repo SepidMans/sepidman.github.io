@@ -3,18 +3,12 @@ layout: layouts/base.njk
 title: About
 description: Learn more about Sepideh Mansouri, her design background, and what guides her work.
 ---
-<section class="page-hero">
-  <div class="page-hero-copy">
-    <p class="eyebrow">About</p>
-    <h1>Designing with calm structure, empathy, and a strong sense of visual tone.</h1>
-    {% for paragraph in site.about.summary %}
-      <p class="page-lead">{{ paragraph }}</p>
-    {% endfor %}
-  </div>
-  <div class="page-hero-visual visual-swatch visual-swatch-coral">
-    <span>Berlin based</span>
-    <strong>UI/UX Designer</strong>
-  </div>
+<section class="page-intro">
+  <p class="eyebrow">About</p>
+  <h1>Designing with calm structure, empathy, and a strong sense of visual tone.</h1>
+  {% for paragraph in site.about.summary %}
+    <p class="page-lead">{{ paragraph }}</p>
+  {% endfor %}
 </section>
 
 <section class="split-section">
