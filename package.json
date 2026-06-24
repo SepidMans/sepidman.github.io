@@ -4,7 +4,7 @@
   "description": "Personal website for Sepideh Mansouri built with Eleventy",
   "private": true,
   "scripts": {
-    "dev": "npx @11ty/eleventy --serve --input=src --output=build",
+    "dev": "CHOKIDAR_USEPOLLING=1 CHOKIDAR_INTERVAL=250 npx @11ty/eleventy --serve --input=src --output=build",
     "build:site": "npx @11ty/eleventy --input=src --output=build",
     "build:pdf": "node tools/generate_resume_pdf.mjs",
     "build": "npm run build:site && npm run build:pdf",

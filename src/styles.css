@@ -518,6 +518,7 @@ li {
 }
 
 .hero-top-graphic-line {
+  stroke: var(--text);
   stroke-dasharray: var(--line-length, 0);
   stroke-dashoffset: var(--line-length, 0);
 }
@@ -542,7 +543,12 @@ li {
 .hero-top-graphic-bulb-outline {
   fill: var(--bulb-warm);
   fill-opacity: 0;
+  stroke: var(--text);
   transition: fill-opacity 260ms ease, stroke 260ms ease;
+}
+
+.hero-top-graphic-bulb-base {
+  stroke: var(--text);
 }
 
 .hero-top-graphic-bulb-filament,
@@ -552,11 +558,11 @@ li {
 
 .hero-top-graphic-label {
   opacity: 0;
-  fill: currentColor;
+  fill: var(--text);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 23px;
+  font-size: 28px;
   font-weight: 600;
-  letter-spacing: 0;
+  letter-spacing: 0.025em;
 }
 
 .hero-top-graphic.is-animated .hero-top-graphic-bulb {
@@ -1310,7 +1316,7 @@ html[data-theme="dark"] .contact-card-link[data-brand="github"]:focus-visible .c
   }
 
   to {
-    opacity: 0.84;
+    opacity: 1;
     transform: translateY(0);
   }
 }

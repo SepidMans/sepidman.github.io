@@ -21,6 +21,7 @@
     <link rel="preload" as="image" href="{{ site.author.brandImage }}" />
     <script>
       (function() {
+        var validThemes = ["auto", "light", "dark"];
         var storedTheme = null;
         try {
           storedTheme = localStorage.getItem("theme");
@@ -28,13 +29,17 @@
           storedTheme = null;
         }
 
-        var theme = storedTheme;
-        if (!theme) {
-          theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        if (validThemes.indexOf(storedTheme) === -1) {
+          storedTheme = null;
         }
 
+        var themeMode = storedTheme || "auto";
+        var theme = themeMode === "auto"
+          ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+          : themeMode;
+
         document.documentElement.setAttribute("data-theme", theme);
-        document.documentElement.setAttribute("data-next-theme-label", theme === "dark" ? "Light" : "Dark");
+        document.documentElement.setAttribute("data-theme-mode", themeMode);
       }());
     </script>
     <link rel="stylesheet" href="/styles.css" />

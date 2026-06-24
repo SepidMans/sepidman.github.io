@@ -1,4 +1,10 @@
 const storageKey = "theme";
+const themeModes = ["auto", "light", "dark"];
+const themeIcons = {
+  auto: "◐",
+  light: "☀",
+  dark: "☾"
+};
 const root = document.documentElement;
 const button = document.querySelector("[data-theme-toggle]");
 const menuToggle = document.querySelector("[data-menu-toggle]");
@@ -8,27 +14,55 @@ function preferredTheme() {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
-function applyTheme(theme) {
-  root.setAttribute("data-theme", theme);
-  root.setAttribute("data-next-theme-label", theme === "dark" ? "Light" : "Dark");
+function normalizeThemeMode(theme) {
+  return themeModes.includes(theme) ? theme : null;
+}
+
+function resolvedTheme(themeMode) {
+  return themeMode === "auto" ? preferredTheme() : themeMode;
+}
+
+function nextThemeMode(themeMode) {
+  const currentIndex = themeModes.indexOf(themeMode);
+  return themeModes[(currentIndex + 1) % themeModes.length];
+}
+
+function formatThemeLabel(themeMode) {
+  return themeMode.charAt(0).toUpperCase() + themeMode.slice(1);
+}
+
+function applyTheme(themeMode) {
+  const activeThemeMode = normalizeThemeMode(themeMode) || "auto";
+  const activeTheme = resolvedTheme(activeThemeMode);
+  const upcomingThemeMode = nextThemeMode(activeThemeMode);
+
+  root.setAttribute("data-theme", activeTheme);
+  root.setAttribute("data-theme-mode", activeThemeMode);
 
   if (!button) {
     return;
   }
 
-  const nextTheme = theme === "dark" ? "light" : "dark";
-  button.setAttribute("aria-pressed", String(theme === "dark"));
-  button.setAttribute("aria-label", `Switch to ${nextTheme} theme`);
+  button.setAttribute(
+    "aria-label",
+    `Theme: ${activeThemeMode}. Switch to ${upcomingThemeMode} theme.`
+  );
+  button.setAttribute("data-tip", `Theme: ${formatThemeLabel(activeThemeMode)}`);
 
   const label = button.querySelector(".theme-toggle-label");
   if (label) {
-    label.textContent = "";
+    label.textContent = formatThemeLabel(activeThemeMode);
+  }
+
+  const icon = button.querySelector(".theme-toggle-icon");
+  if (icon) {
+    icon.textContent = themeIcons[activeThemeMode];
   }
 }
 
 function storedTheme() {
   try {
-    return localStorage.getItem(storageKey);
+    return normalizeThemeMode(localStorage.getItem(storageKey));
   } catch (error) {
     return null;
   }
@@ -42,22 +76,23 @@ function persistTheme(theme) {
   }
 }
 
-const initialTheme = storedTheme() || root.getAttribute("data-theme") || preferredTheme();
-applyTheme(initialTheme);
+const initialThemeMode = storedTheme() || normalizeThemeMode(root.getAttribute("data-theme-mode")) || "auto";
+applyTheme(initialThemeMode);
 
 if (button) {
   button.addEventListener("click", () => {
-    const currentTheme = root.getAttribute("data-theme") || preferredTheme();
-    const nextTheme = currentTheme === "dark" ? "light" : "dark";
-    applyTheme(nextTheme);
-    persistTheme(nextTheme);
+    const currentThemeMode = normalizeThemeMode(root.getAttribute("data-theme-mode")) || "auto";
+    const upcomingThemeMode = nextThemeMode(currentThemeMode);
+    applyTheme(upcomingThemeMode);
+    persistTheme(upcomingThemeMode);
   });
 }
 
 const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 mediaQuery.addEventListener("change", () => {
-  if (!storedTheme()) {
-    applyTheme(preferredTheme());
+  const activeThemeMode = storedTheme() || normalizeThemeMode(root.getAttribute("data-theme-mode")) || "auto";
+  if (activeThemeMode === "auto") {
+    applyTheme("auto");
   }
 });
 
