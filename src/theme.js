@@ -108,3 +108,24 @@ if (menuToggle && siteNav) {
   window.addEventListener("resize", syncMenuForViewport);
   syncMenuForViewport();
 }
+
+function animateHeroGraphic() {
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const graphic = document.querySelector(".hero-top-graphic");
+
+  if (!graphic || prefersReducedMotion) {
+    return;
+  }
+
+  const paths = graphic.querySelectorAll(".hero-top-graphic-line");
+  paths.forEach((path) => {
+    const length = path.getTotalLength();
+    path.style.setProperty("--line-length", String(length));
+  });
+
+  window.requestAnimationFrame(() => {
+    graphic.classList.add("is-animated");
+  });
+}
+
+animateHeroGraphic();

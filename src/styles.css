@@ -35,6 +35,8 @@
   --button-secondary-border: rgba(20, 54, 68, 0.14);
   --solid-button-bg: #173743;
   --solid-button-text: #f7f4ef;
+  --bulb-warm: #ffd36a;
+  --bulb-warm-strong: #ffbf47;
   --brandmark-bg: #173743;
   --brandmark-text: #f7f4ef;
   --skip-link-bg: #173743;
@@ -94,6 +96,8 @@
   --button-secondary-border: rgba(255, 255, 255, 0.18);
   --solid-button-bg: #ff8a70;
   --solid-button-text: #10202c;
+  --bulb-warm: #ffd36a;
+  --bulb-warm-strong: #ffe08b;
   --brandmark-bg: #ff8a70;
   --brandmark-text: #10202c;
   --skip-link-bg: #ff8a70;
@@ -447,6 +451,10 @@ html[data-theme="dark"] .social-icon-link[data-brand="github"]:focus-visible {
   margin-top: 4rem;
 }
 
+.site-main > .hero-top-graphic + * {
+  margin-top: 1.4rem;
+}
+
 .eyebrow {
   margin: 0;
   text-transform: uppercase;
@@ -489,6 +497,131 @@ li {
 .page-hero-copy p {
   max-width: 42rem;
   font-size: 1.02rem;
+}
+
+.hero-top-graphic {
+  position: relative;
+  margin: -0.6rem auto 0;
+  margin-left: calc(50% - 50vw);
+  width: calc(50vw + 50%);
+  max-width: calc(50vw + 50%);
+  pointer-events: none;
+  z-index: 0;
+  color: var(--text);
+  overflow: hidden;
+}
+
+.hero-top-graphic-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero-top-graphic-line {
+  stroke-dasharray: var(--line-length, 0);
+  stroke-dashoffset: var(--line-length, 0);
+}
+
+.hero-top-graphic-bulb {
+  opacity: 0;
+  transform-origin: 1165px 182px;
+}
+
+.hero-top-graphic-bulb-glow {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.hero-top-graphic-bulb-aura {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.hero-top-graphic-bulb-outline {
+  fill: var(--bulb-warm);
+  fill-opacity: 0;
+  transition: fill-opacity 260ms ease, stroke 260ms ease;
+}
+
+.hero-top-graphic-bulb-filament,
+.hero-top-graphic-bulb-base {
+  transition: stroke 260ms ease;
+}
+
+.hero-top-graphic-label {
+  opacity: 0;
+  fill: currentColor;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.hero-top-graphic.is-animated .hero-top-graphic-bulb {
+  animation: reveal-bulb 260ms ease 1.92s both;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-top-graphic.is-animated .hero-top-graphic-line {
+    animation: draw-line 2.45s cubic-bezier(0.24, 0.78, 0.3, 1) 120ms both;
+  }
+
+  .hero-top-graphic.is-animated .hero-top-graphic-bulb-outline {
+    animation: bulb-fill-on 520ms ease 2.18s both;
+  }
+
+  .hero-top-graphic.is-animated .hero-top-graphic-bulb-filament {
+    animation: bulb-stroke-on 420ms ease 2.18s both;
+  }
+
+  .hero-top-graphic.is-animated .hero-top-graphic-bulb-glow {
+    animation: bulb-core-on 420ms ease-out 2.2s both;
+  }
+
+  .hero-top-graphic.is-animated .hero-top-graphic-bulb-aura {
+    animation: bulb-aura-on 820ms ease-out 2.34s both;
+  }
+
+  .hero-top-graphic.is-animated .hero-top-graphic-label-top {
+    animation: reveal-graphic-label 560ms ease 2.86s both;
+  }
+
+  .hero-top-graphic.is-animated .hero-top-graphic-label-bottom {
+    animation: reveal-graphic-label 560ms ease 3.24s both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-top-graphic-line {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+  }
+
+  .hero-top-graphic-bulb {
+    opacity: 1;
+  }
+
+  .hero-top-graphic-bulb-glow {
+    opacity: 0.34;
+  }
+
+  .hero-top-graphic-bulb-aura {
+    opacity: 0.18;
+  }
+
+  .hero-top-graphic-bulb-filament {
+    stroke: var(--bulb-warm-strong);
+  }
+
+  .hero-top-graphic-bulb-outline {
+    fill-opacity: 1;
+  }
+
+  .hero-top-graphic-label {
+    opacity: 1;
+  }
 }
 
 .hero-grid,
@@ -545,20 +678,8 @@ li {
   color: var(--inverse-text);
 }
 
-.hero-graphic-frame {
-  margin-top: 1rem;
-  padding: 1rem;
-  border-radius: calc(var(--radius-md) + 2px);
-  background: rgba(250, 247, 242, 0.96);
-}
-
-.hero-graphic {
-  width: 100%;
-  height: auto;
-}
-
 .hero-panel-caption {
-  margin: 1.1rem 0 0;
+  margin: 0.8rem 0 0;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1.2rem;
   letter-spacing: -0.02em;
@@ -1100,6 +1221,96 @@ html[data-theme="dark"] .contact-card-link[data-brand="github"]:focus-visible .c
 
   to {
     opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes draw-line {
+  from {
+    stroke-dashoffset: var(--line-length, 0);
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes reveal-bulb {
+  from {
+    opacity: 0;
+    transform: translateY(3px) scale(0.88);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes bulb-fill-on {
+  from {
+    fill-opacity: 0;
+  }
+
+  35% {
+    fill-opacity: 0.18;
+  }
+
+  to {
+    fill-opacity: 1;
+  }
+}
+
+@keyframes bulb-stroke-on {
+  from {
+    stroke: currentColor;
+  }
+
+  to {
+    stroke: var(--bulb-warm-strong);
+  }
+}
+
+@keyframes bulb-core-on {
+  from {
+    opacity: 0;
+    transform: scale(0.42);
+  }
+
+  65% {
+    opacity: 0.48;
+  }
+
+  to {
+    opacity: 0.42;
+    transform: scale(1);
+  }
+}
+
+@keyframes bulb-aura-on {
+  from {
+    opacity: 0;
+    transform: scale(0.78);
+  }
+
+  55% {
+    opacity: 0.08;
+  }
+
+  to {
+    opacity: 0.24;
+    transform: scale(1);
+  }
+}
+
+@keyframes reveal-graphic-label {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 0.84;
     transform: translateY(0);
   }
 }
